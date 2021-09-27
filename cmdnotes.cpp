@@ -38,9 +38,7 @@ int main(int argc, char *argv[])
 
 	// the main code that the user interacts with
 	cout << "welcome to cmdnotes release 1.0 <3\ntype -help for a list of commands\n";
-	while (true) {
-		startofcode:
-		getline(cin, input);
+
 		if (input == "-list") {
 			for (int i = 0; i < SaveNoteOnLine; i++) {
 				cout << i + 1 << " " << Notes.at(i) << endl;
@@ -76,7 +74,7 @@ int main(int argc, char *argv[])
 			for (int i = 0; input.size() > i; i++) {
 				if (isdigit(input.at(i)) == false) {
 					cout << "-see only accepts an integer as an input\n";
-					goto startofcode;
+					return 0;
 				}
 			}
 			stringstream ss(input);
@@ -95,7 +93,7 @@ int main(int argc, char *argv[])
 			for (int i = 0; input.size() > i; i++) {
 				if (isdigit(input.at(i)) == false) {
 					cout << "-delete only accepts an integer as an input\n";
-					goto startofcode;
+					return 0;
 				}
 			}
 			stringstream ss(input);
@@ -203,12 +201,12 @@ int main(int argc, char *argv[])
 		for (int i = 0; input.size() > i; i++) {
 			if (isdigit(input.at(i)) == false) {
 				cout << "-amend only accepts an integer as an input\n";
-				goto startofcode;
+				return 0;
 			}
 		}
 		if (PrintNote > SaveNoteOnLine) {
 			cout << "Sorry! that note doesnt exist\n";
-			goto startofcode;
+			return 0;
 		}
 		// shows the user the contents of the note they want to edit
 		else {
@@ -234,14 +232,11 @@ int main(int argc, char *argv[])
 			cout << "this program is licenced under the GPLv3, a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html" << endl;
 		}
 		else if (input == "-debug"){
-		
-		//print the arguments given to the program at runtime
-		for (int i = 0; i < argc; ++i)
-        cout << argv[i] << "\n";
-		
+			
+			cout << argv[1];
+
 		}
 		else {
 			//do nothing
 		}
 	}
-}
