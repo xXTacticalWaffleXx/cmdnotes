@@ -12,7 +12,7 @@ using namespace std;
 // this is the source code for cmdnotes beta v7.1, it will almost certainly be awful, i apologise for the pain reading this code may cause.
 // this program is licenced under the GPLv3 a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html
 
-int main()
+int main(int argc, char *argv[])
 {
 	//sets up varibles that the program needs
 	string input;
@@ -37,7 +37,7 @@ int main()
 	SaveNoteOnLine = Notes.size();
 
 	// the main code that the user interacts with
-	cout << "welcome to cmdnotes beta v7.1 <3\ntype -help for a list of commands\n";
+	cout << "welcome to cmdnotes release 1.0 <3\ntype -help for a list of commands\n";
 	while (true) {
 		startofcode:
 		getline(cin, input);
@@ -144,7 +144,7 @@ int main()
 			cout << "-commit: saves your changes in a transaction to file" << endl;
 			cout << "-rollback: reverts your changes" << endl;
 			cout << "-amend: lets you overwrite an existing note" << endl;
-			cout << "this program is licenced under the GPLv3 copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html" << endl
+			cout << "-about: tells you information about the program" << endl;
 		}
 		else if (input == "-transaction") {
 			if (rollback == true) {
@@ -228,6 +228,18 @@ int main()
 		}
 		//todo: make it so that the note is shown in the users input bar and they can edit it right there instead of just overwriting the note.
 			}
+		else if (input == "-about"){
+			cout << "author: luna aphelion" << endl;
+			cout << "contact: luna-aphelion@outlook.com" << endl;
+			cout << "this program is licenced under the GPLv3, a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html" << endl;
+		}
+		else if (input == "-debug"){
+		
+		//print the arguments given to the program at runtime
+		for (int i = 0; i < argc; ++i)
+        cout << argv[i] << "\n";
+		
+		}
 		else {
 			//do nothing
 		}
