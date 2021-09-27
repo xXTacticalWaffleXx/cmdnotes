@@ -12,6 +12,21 @@ using namespace std;
 // this is the source code for cmdnotes beta v7.1, it will almost certainly be awful, i apologise for the pain reading this code may cause.
 // this program is licenced under the GPLv3 a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html
 
+void PrintHelp(){
+			// lists the commands
+			cout << "-exit: closes the program" << endl;
+			cout << "-see: lets you print a specific note" << endl;
+			cout << "-delete lets you delete a note" << endl;
+			cout << "-mknote: lets you make a new note" << endl;
+			cout << "-list: prints all your notes to the screen" << endl;
+			cout << "-transaction: starts a transaction allowing you to rollback changes" << endl;
+			cout << "-commit: saves your changes in a transaction to file" << endl;
+			cout << "-rollback: reverts your changes" << endl;
+			cout << "-amend: lets you overwrite an existing note" << endl;
+			cout << "-about: tells you information about the program" << endl;
+}
+
+
 int main(int argc, char *argv[])
 {
 	//sets up varibles that the program needs
@@ -22,6 +37,10 @@ int main(int argc, char *argv[])
 	string NoteToDump;
 	int PrintNote; //also used for the delete command
 	bool rollback = false;
+
+	if (argc == 2) {
+	input = argv[1];
+	}
 
 	// imports any notes the user has saved in prior sessions
 	ifstream in("cmdnotes_data.txt");
@@ -37,7 +56,6 @@ int main(int argc, char *argv[])
 	SaveNoteOnLine = Notes.size();
 
 	// the main code that the user interacts with
-	cout << "welcome to cmdnotes release 1.0 <3\ntype -help for a list of commands\n";
 
 		if (input == "-list") {
 			for (int i = 0; i < SaveNoteOnLine; i++) {
@@ -132,17 +150,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if (input == "-help") {
-			// lists the commands
-			cout << "-exit: closes the program" << endl;
-			cout << "-see: lets you print a specific note" << endl;
-			cout << "-delete lets you delete a note" << endl;
-			cout << "-mknote: lets you make a new note" << endl;
-			cout << "-list: prints all your notes to the screen" << endl;
-			cout << "-transaction: starts a transaction allowing you to rollback changes" << endl;
-			cout << "-commit: saves your changes in a transaction to file" << endl;
-			cout << "-rollback: reverts your changes" << endl;
-			cout << "-amend: lets you overwrite an existing note" << endl;
-			cout << "-about: tells you information about the program" << endl;
+			PrintHelp();
 		}
 		else if (input == "-transaction") {
 			if (rollback == true) {
@@ -237,6 +245,7 @@ int main(int argc, char *argv[])
 
 		}
 		else {
-			//do nothing
+			PrintHelp();
 		}
+		return 0;
 	}
