@@ -58,6 +58,11 @@ int main(int argc, char *argv[])
 	// the main code that the user interacts with
 
 		if (input == "-list") {
+			
+			if (SaveNoteOnLine == 0) {
+				cout << "you have no notes\n";
+			}
+
 			for (int i = 0; i < SaveNoteOnLine; i++) {
 				cout << i + 1 << " " << Notes.at(i) << endl;
 			}
