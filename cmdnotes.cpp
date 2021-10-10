@@ -90,9 +90,9 @@ int main(int argc, char *argv[])
 		}
 		
 		else if (input == "-delete") {
-			cout << "what note do you want to delete, type -1 to cancel\n";
-			cin >> input;
-			cin.ignore();
+			
+			input = argv[2];
+
 			for (int i = 0; input.size() > i; i++) {
 				if (isdigit(input.at(i)) == false) {
 					cout << "-delete only accepts an integer as an input\n";
@@ -139,9 +139,9 @@ int main(int argc, char *argv[])
 
 		else if (input == "-amend") {
 			//allows the user to write to a position in the vector they have already written to
-			cout << "what note do you want to edit\n";
-			cin >> input;
-			cin.ignore();
+
+			input = argv[2];
+
 			stringstream ss(input);
 			ss >> PrintNote;
 			//checks the users input to make sure its an integer
