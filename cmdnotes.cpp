@@ -14,7 +14,6 @@ using namespace std;
 
 void PrintHelp(){
 			// lists the commands
-			cout << "-exit: closes the program" << endl;
 			cout << "-see: lets you print a specific note" << endl;
 			cout << "-delete lets you delete a note" << endl;
 			cout << "-mknote: lets you make a new note" << endl;
@@ -65,29 +64,6 @@ int main(int argc, char *argv[])
 
 			for (int i = 0; i < SaveNoteOnLine; i++) {
 				cout << i + 1 << " " << Notes.at(i) << endl;
-			}
-		}
-		else if (input == "-exit") {
-			if (rollback == true) {
-				cout << "you still have a transaction open, would you like to commit your changes\n(Y/N)\n";
-				cin >> input;
-				cin.ignore();
-				if (input == "y" || input == "Y") {
-					// saves the vector to file
-					ofstream outFile("cmdnotes_data.txt");
-					for (const auto &e : Notes) outFile << e << "\n";
-					cout << "vector saved to file\n";
-					outFile.close();
-					return 0;
-				} if (input == "n" || input == "N") {
-					return 0;
-				}
-				else {
-					cout << "invalid input\n";
-				}
-			}
-			else {
-				return 0;
 			}
 		}
 		else if (input == "-see") {
