@@ -4,6 +4,7 @@
 /*
 TODO:
 make it tell the user that a command does not exist in stead of just calling PrintHelp()
+add a confirmation thing to -delete and -amend
 */
 
 
