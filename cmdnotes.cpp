@@ -9,7 +9,7 @@
 
 using namespace std;
 
-// this is the source code for cmdnotes beta v7.1, it will almost certainly be awful, i apologise for the pain reading this code may cause.
+// this is the source code for cmdnotes, it will almost certainly be awful, i apologise for the pain reading this code may cause.
 // this program is licenced under the GPLv3 a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html
 
 void PrintHelp(){
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	int PrintNote; //also used for the delete command
 	bool rollback = false;
 
-	if (argc == 2) {
+	if (argc < 1){
 	input = argv[1];
 	}
 
@@ -142,8 +142,9 @@ int main(int argc, char *argv[])
 
 		}
 		else if (input == "-mknote") {
-			getline(cin, input);
-			Notes.push_back(input);
+			cout << "dingus\n";
+			//getline(cin, input);
+			Notes.push_back(argv[2]);
 			cout << "saved on line " << SaveNoteOnLine + 1 << endl;
 			SaveNoteOnLine++;
 			//save the vector to file
