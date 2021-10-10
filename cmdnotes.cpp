@@ -1,6 +1,12 @@
 // author: luna aphelion
 // contact: luna-aphelion@outlook.com
 
+/*
+TODO:
+make it tell the user that a command does not exist in stead of just calling PrintHelp()
+*/
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -33,7 +39,7 @@ int main(int argc, char *argv[])
 	string NoteToDump;
 	int PrintNote; //also used for the delete command
 
-	if (argc < 1){
+	if (argc > 1){
 	input = argv[1];
 	}
 
@@ -64,9 +70,9 @@ int main(int argc, char *argv[])
 		}
 		
 		else if (input == "-see") {
-			cout << "what note do you want\n";
-			cin >> input;
-			cin.ignore();
+			
+			input = argv[2];
+
 			for (int i = 0; input.size() > i; i++) {
 				if (isdigit(input.at(i)) == false) {
 					cout << "-see only accepts an integer as an input\n";
