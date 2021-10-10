@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 	string output; //a var needed for specific situations, not used for all output
 	string NoteToDump;
 	int PrintNote; //also used for the delete command
-	bool rollback = false;
 
 	if (argc < 1){
 	input = argv[1];
@@ -103,15 +102,15 @@ int main(int argc, char *argv[])
 				cout << "Sorry! that note doesnt exist\n";
 			}
 			else {
+				
 				Notes.erase(Notes.begin() + (PrintNote - 1));
 				SaveNoteOnLine = SaveNoteOnLine - 1;
+				
 				// saves the vector to the file
-				if (rollback == false) {
 					ofstream outFile("cmdnotes_data.txt");
 					for (const auto &e : Notes) outFile << e << "\n";
 					cout << "vector saved to file\n";
 					outFile.close();
-				}
 			}
 		}
 
@@ -122,12 +121,10 @@ int main(int argc, char *argv[])
 			cout << "saved on line " << SaveNoteOnLine + 1 << endl;
 			SaveNoteOnLine++;
 			//save the vector to file
-			if (rollback == false) {
 				ofstream outFile("cmdnotes_data.txt");
 				for (const auto &e : Notes) outFile << e << "\n";
 				cout << "vector saved to file\n";
 				outFile.close();
-			}
 		}
 
 		else if (input == "-help") {
@@ -166,12 +163,10 @@ int main(int argc, char *argv[])
 			Notes.at(PrintNote - 1) = input;
 			cout << "note saved to vector\n";
 			//saves the vector to file
-			if (rollback == false) {
 				ofstream outFile("cmdnotes_data.txt");
 				for (const auto& e : Notes) outFile << e << "\n";
 				cout << "vector saved to file\n";
 				outFile.close();
-			}
 			//todo: make it so that the note is shown in the users input bar and they can edit it right there instead of just overwriting the note.
 			}
 		
