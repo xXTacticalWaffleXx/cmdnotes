@@ -61,7 +61,7 @@ int main(int argc, char * argv[]) {
 	if (input == "-list") {
 
 		if (SaveNoteOnLine == 0) {
-			cout << "you have no notes\n";
+			cout << "you have no notes" << endl;
 		}
 
 		for (int i = 0; i < SaveNoteOnLine; i++) {
@@ -73,14 +73,14 @@ int main(int argc, char * argv[]) {
 
 		for (int i = 0; input.size() > i; i++) {
 			if (isdigit(input.at(i)) == false) {
-				cout << "-see only accepts an integer as an input\n";
+				cout << "-see only accepts an integer as an input" << endl;
 				return 0;
 			}
 		}
 		stringstream ss(input);
 		ss >> PrintNote;
 		if (PrintNote > SaveNoteOnLine) {
-			cout << "Sorry! that note doesnt exist\n";
+			cout << "Sorry! that note doesnt exist" << endl;
 		} else {
 			cout << Notes.at(PrintNote - 1) << endl;
 		}
@@ -90,7 +90,7 @@ int main(int argc, char * argv[]) {
 
 		for (int i = 0; input.size() > i; i++) {
 			if (isdigit(input.at(i)) == false) {
-				cout << "-delete only accepts an integer as an input\n";
+				cout << "-delete only accepts an integer as an input" << endl;
 				return 0;
 			}
 		}
@@ -99,7 +99,7 @@ int main(int argc, char * argv[]) {
 		if (PrintNote == -1) {
 			//does nothing
 		} else if (PrintNote > SaveNoteOnLine) {
-			cout << "Sorry! that note doesnt exist\n";
+			cout << "Sorry! that note doesnt exist" << endl;
 		} else {
 
 			Notes.erase(Notes.begin() + (PrintNote - 1));
@@ -107,20 +107,20 @@ int main(int argc, char * argv[]) {
 
 			// saves the vector to the file
 			ofstream outFile("cmdnotes_data.txt");
-			for (const auto & e: Notes) outFile << e << "\n";
-			cout << "vector saved to file\n";
+			for (const auto & e: Notes) outFile << e << endl;
+			cout << "vector saved to file" << endl;
 			outFile.close();
 		}
 	} else if (input == "-mknote") {
-		cout << "dingus\n";
+		cout << "dingus" << endl;
 		//getline(cin, input);
 		Notes.push_back(argv[2]);
 		cout << "saved on line " << SaveNoteOnLine + 1 << endl;
 		SaveNoteOnLine++;
 		//save the vector to file
 		ofstream outFile("cmdnotes_data.txt");
-		for (const auto & e: Notes) outFile << e << "\n";
-		cout << "vector saved to file\n";
+		for (const auto & e: Notes) outFile << e << endl;
+		cout << "vector saved to file" << endl;
 		outFile.close();
 	} else if (input == "-help") {
 		PrintHelp();
@@ -134,13 +134,13 @@ int main(int argc, char * argv[]) {
 		//checks the users input to make sure its an integer
 		for (int i = 0; input.size() > i; i++) {
 			if (isdigit(input.at(i)) == false) {
-				cout << "-amend only accepts an integer as an input\n";
+				cout << "-amend only accepts an integer as an input" << endl;
 				return 0;
 			}
 		}
 		//check if the note exists
 		if (PrintNote > SaveNoteOnLine) {
-			cout << "Sorry! that note doesnt exist\n";
+			cout << "Sorry! that note doesnt exist" << endl;
 			return 0;
 
 		}
@@ -150,14 +150,14 @@ int main(int argc, char * argv[]) {
 			cout << Notes.at(PrintNote - 1) << endl;
 		}
 		// lets the user overwrite the note
-		cout << "please type what the note should be\n";
+		cout << "please type what the note should be" << endl;
 		getline(cin, input);
 		Notes.at(PrintNote - 1) = input;
-		cout << "note saved to vector\n";
+		cout << "note saved to vector" << endl;
 		//saves the vector to file
 		ofstream outFile("cmdnotes_data.txt");
-		for (const auto & e: Notes) outFile << e << "\n";
-		cout << "vector saved to file\n";
+		for (const auto & e: Notes) outFile << e << endl;
+		cout << "vector saved to file" << endl;
 		outFile.close();
 		//todo: make it so that the note is shown in the users input bar and they can edit it right there instead of just overwriting the note.
 	} else if (input == "-about") {
@@ -174,4 +174,3 @@ int main(int argc, char * argv[]) {
 	}
 	return 0;
 }
-
