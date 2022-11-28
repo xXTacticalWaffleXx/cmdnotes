@@ -3,22 +3,19 @@
 
 /*
 TODO:
-make it tell the user that a command does not exist in stead of just calling PrintHelp()
-add a confirmation thing to -delete and -amend
+make it tell the user that a command does not exist in stead of just calling
+PrintHelp() add a confirmation thing to -delete and -amend
 */
 
+#include <fstream>
 #include <iostream>
-
-#include <string>
-
+#include <sstream>
 #include <vector>
 
-#include <sstream>
-
-#include <fstream>
-
-// this is the source code for cmdnotes, it will almost certainly be awful, i apologise for the pain reading this code may cause.
-// this program is licenced under the GPLv3 a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html
+// this is the source code for cmdnotes, it will almost certainly be awful, i
+// apologise for the pain reading this code may cause. this program is licenced
+// under the GPLv3 a copy of which can be found at
+// https://www.gnu.org/licenses/gpl-3.0.en.html
 
 void PrintHelp() {
 	// lists the commands
@@ -31,13 +28,14 @@ void PrintHelp() {
 }
 
 int main(int argc, char *argv[]) {
-	//sets up varibles that the program needs
+	// sets up varibles that the program needs
 	std::string input;
 	std::vector <std::string> Notes;
 	int SaveNoteOnLine = 1;
-	std::string output; //a var needed for specific situations, not used for all output
+	std::string
+			output; // a var needed for specific situations, not used for all output
 	std::string NoteToDump;
-	int PrintNote; //also used for the delete command
+	int PrintNote; // also used for the delete command
 
 	if (argc > 1) {
 		input = argv[1];
@@ -96,7 +94,7 @@ int main(int argc, char *argv[]) {
 		std::stringstream ss(input);
 		ss >> PrintNote;
 		if (PrintNote == -1) {
-			//does nothing
+			// does nothing
 		} else if (PrintNote > SaveNoteOnLine) {
 			std::cout << "Sorry! that note doesnt exist" << std::endl;
 		} else {
@@ -106,38 +104,41 @@ int main(int argc, char *argv[]) {
 
 			// saves the vector to the file
 			std::ofstream outFile("cmdnotes_data.txt");
-			for (const auto &e: Notes) outFile << e << std::endl;
+			for (const auto &e: Notes)
+				outFile << e << std::endl;
 			std::cout << "vector saved to file" << std::endl;
 			outFile.close();
 		}
 	} else if (input == "-mknote") {
 		std::cout << "dingus" << std::endl;
-		//getline(std::cin, input);
+		// getline(std::cin, input);
 		Notes.push_back(argv[2]);
 		std::cout << "saved on line " << SaveNoteOnLine + 1 << std::endl;
 		SaveNoteOnLine++;
-		//save the vector to file
+		// save the vector to file
 		std::ofstream outFile("cmdnotes_data.txt");
-		for (const auto &e: Notes) outFile << e << std::endl;
+		for (const auto &e: Notes)
+			outFile << e << std::endl;
 		std::cout << "vector saved to file" << std::endl;
 		outFile.close();
 	} else if (input == "-help") {
 		PrintHelp();
 	} else if (input == "-amend") {
-		//allows the user to write to a position in the vector they have already written to
+		// allows the user to write to a position in the vector they have already
+		// written to
 
 		input = argv[2];
 
 		std::stringstream ss(input);
 		ss >> PrintNote;
-		//checks the users input to make sure its an integer
+		// checks the users input to make sure its an integer
 		for (int i = 0; input.size() > i; i++) {
 			if (isdigit(input.at(i)) == false) {
 				std::cout << "-amend only accepts an integer as an input" << std::endl;
 				return 0;
 			}
 		}
-		//check if the note exists
+		// check if the note exists
 		if (PrintNote > SaveNoteOnLine) {
 			std::cout << "Sorry! that note doesnt exist" << std::endl;
 			return 0;
@@ -153,21 +154,24 @@ int main(int argc, char *argv[]) {
 		getline(std::cin, input);
 		Notes.at(PrintNote - 1) = input;
 		std::cout << "note saved to vector" << std::endl;
-		//saves the vector to file
+		// saves the vector to file
 		std::ofstream outFile("cmdnotes_data.txt");
-		for (const auto &e: Notes) outFile << e << std::endl;
+		for (const auto &e: Notes)
+			outFile << e << std::endl;
 		std::cout << "vector saved to file" << std::endl;
 		outFile.close();
-		//todo: make it so that the note is shown in the users input bar and they can edit it right there instead of just overwriting the note.
+		// todo: make it so that the note is shown in the users input bar and they
+		// can edit it right there instead of just overwriting the note.
 	} else if (input == "-about") {
 		std::cout << "author: luna aphelion" << std::endl;
 		std::cout << "contact: luna-aphelion@outlook.com" << std::endl;
-		std::cout
-				<< "this program is licenced under the GPLv3, a copy of which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html"
-				<< std::endl;
+		std::cout << "this program is licenced under the GPLv3, a copy of which "
+					 "can be found at https://www.gnu.org/licenses/gpl-3.0.en.html"
+				  << std::endl;
 	} else if (input == "-debug") {
 
-		// this case exists for development reasons, the code in here will change often
+		// this case exists for development reasons, the code in here will change
+		// often
 		std::cout << argv[1];
 
 	} else {
