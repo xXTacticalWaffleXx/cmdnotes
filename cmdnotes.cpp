@@ -19,19 +19,19 @@ PrintHelp() add a confirmation thing to -delete and -amend
 
 void PrintHelp() {
 	// lists the commands
-	std::cout << "-see: lets you print a specific note" << std::endl;
-	std::cout << "-delete lets you delete a note" << std::endl;
-	std::cout << "-mknote: lets you make a new note" << std::endl;
-	std::cout << "-list: prints all your notes to the screen" << std::endl;
-	std::cout << "-amend: lets you overwrite an existing note" << std::endl;
-	std::cout << "-about: tells you information about the program" << std::endl;
+	std::cout << "-see: lets you print a specific note" << std::endl
+			  << "-delete lets you delete a note" << std::endl
+			  << "-mknote: lets you make a new note" << std::endl
+			  << "-list: prints all your notes to the screen" << std::endl
+			  << "-amend: lets you overwrite an existing note" << std::endl
+			  << "-about: tells you information about the program" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
-	// sets up varibles that the program needs
+	// sets up variables that the program needs
 	std::string input;
-	std::vector <std::string> Notes;
-	int SaveNoteOnLine = 1;
+	std::vector<std::string> Notes;
+	int SaveNoteOnLine;
 	std::string
 			output; // a var needed for specific situations, not used for all output
 	std::string NoteToDump;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 	// Read the next line from File untill it reaches the end.
 	while (getline(in, str)) {
 		// Line contains string of length > 0 then save it in vector
-		if (str.size() > 0)
+		if (!str.empty())
 			Notes.push_back(str);
 	}
 	in.close();
@@ -68,8 +68,8 @@ int main(int argc, char *argv[]) {
 
 		input = argv[2];
 
-		for (int i = 0; input.size() > i; i++) {
-			if (isdigit(input.at(i)) == false) {
+		for (char i: input) {
+			if (isdigit(i) == false) {
 				std::cout << "-see only accepts an integer as an input" << std::endl;
 				return 0;
 			}
@@ -85,8 +85,8 @@ int main(int argc, char *argv[]) {
 
 		input = argv[2];
 
-		for (int i = 0; input.size() > i; i++) {
-			if (isdigit(input.at(i)) == false) {
+		for (char i: input) {
+			if (isdigit(i) == false) {
 				std::cout << "-delete only accepts an integer as an input" << std::endl;
 				return 0;
 			}
@@ -100,7 +100,6 @@ int main(int argc, char *argv[]) {
 		} else {
 
 			Notes.erase(Notes.begin() + (PrintNote - 1));
-			SaveNoteOnLine = SaveNoteOnLine - 1;
 
 			// saves the vector to the file
 			std::ofstream outFile("cmdnotes_data.txt");
@@ -112,9 +111,8 @@ int main(int argc, char *argv[]) {
 	} else if (input == "-mknote") {
 		std::cout << "dingus" << std::endl;
 		// getline(std::cin, input);
-		Notes.push_back(argv[2]);
+		Notes.emplace_back(argv[2]);
 		std::cout << "saved on line " << SaveNoteOnLine + 1 << std::endl;
-		SaveNoteOnLine++;
 		// save the vector to file
 		std::ofstream outFile("cmdnotes_data.txt");
 		for (const auto &e: Notes)
@@ -131,9 +129,9 @@ int main(int argc, char *argv[]) {
 
 		std::stringstream ss(input);
 		ss >> PrintNote;
-		// checks the users input to make sure its an integer
-		for (int i = 0; input.size() > i; i++) {
-			if (isdigit(input.at(i)) == false) {
+		// checks the users input to make sure it's an integer
+		for (char i: input) {
+			if (isdigit(i) == false) {
 				std::cout << "-amend only accepts an integer as an input" << std::endl;
 				return 0;
 			}
@@ -163,9 +161,9 @@ int main(int argc, char *argv[]) {
 		// todo: make it so that the note is shown in the users input bar and they
 		// can edit it right there instead of just overwriting the note.
 	} else if (input == "-about") {
-		std::cout << "author: luna aphelion" << std::endl;
-		std::cout << "contact: luna-aphelion@outlook.com" << std::endl;
-		std::cout << "this program is licenced under the GPLv3, a copy of which "
+		std::cout << "author: luna aphelion" << std::endl
+				  << "contact: luna-aphelion@outlook.com" << std::endl
+				  << "this program is licenced under the GPLv3, a copy of which "
 					 "can be found at https://www.gnu.org/licenses/gpl-3.0.en.html"
 				  << std::endl;
 	} else if (input == "-debug") {
